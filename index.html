@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحمد مصطفى | للتصميم الجرافيكي والتسويق</title>
+    <style>
+        /* إعدادات عامة */
+        :root {
+            /* ألوان مستوحاة من الشعار */
+            --primary-black: #050505;
+            --primary-gold: #f5a623; /* درجة الذهبي/البرتقالي من الشعار */
+            --light-bg: #ffffff;
+            --text-dark: #222222;
+
+            /* [جديد] متغيرات مساعدة لحجم الهيدر عند التمرير */
+            --header-padding: 15px 50px;
+            --header-logo-size: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden; /* [جديد] منع أي تمرير أفقي ناتج عن التأثيرات الحركية */
+        }
+
+        /* شريط التنقل */
+        header {
+            background-color: var(--primary-black);
+            padding: var(--header-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            /* [جديد] انتقال سلس عند تغيّر الحجم والظل عند التمرير */
+            transition: padding 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* [جديد] حالة الهيدر بعد التمرير لأسفل (Sticky Shrink Effect) */
+        header.scrolled {
+            padding: 8px 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+            background-color: #000; /* أسود أكثر صرامة لإحساس أعمق بالعمق */
+        }
+
+        .logo {
+            color: var(--primary-gold);
+            font-size: var(--header-logo-size);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: font-size 0.3s ease;
+        }
+
+        header.scrolled .logo { 
+            font-size: 20px; /* تصغير طفيف للشعار عند التقلص */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* =========================================
+           [جديد] زر القائمة الجانبية (Hamburger Menu)
+           مخفي افتراضياً، يظهر فقط على الشاشات الصغيرة
+           ========================================= */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+            padding: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary-gold);
+            border-radius: 3px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* تحويل الأيقونة إلى علامة "X" عند فتح القائمة */
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8.5px) rotate(45deg);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8.5px) rotate(-45deg);
+        }
+
+        /* القسم الرئيسي (Hero) */
+        .hero {
+            height: 100vh;
+            background-color: var(--primary-black);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* تأثير دائري في الخلفية يشبه الشعار */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border: 5px solid var(--primary-gold);
+            border-radius: 50%;
+            opacity: 0.1;
+            top: -100px;
+            right: -150px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-gold);
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin-bottom: 40px;
+            color: #ddd;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            background-color: var(--primary-gold);
+            color: var(--primary-black);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(245, 166, 35, 0.4);
+            background-color: #fff;
+        }
+
+        /* قسم الخدمات */
+        .services {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-black);
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            color: var(--primary-gold);
+        }
+
+        .services-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background-color: #f4f4f4;
+            padding: 40px 30px;
+            border-radius: 15px;
+            width: 320px;
+            transition: all 0.3s ease;
+            border-bottom: 5px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 5px solid var(--primary-gold);
+            background-color: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-card h3 {
+            color: var(--primary-black);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .service-card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           [جديد] قسم معرض الأعمال (Portfolio)
+           تصميم شبكي (Grid) بين الخدمات والتواصل
+           ========================================= */
+        .portfolio {
+            padding: 100px 20px;
+            text-align: center;
+            background-color: #f9f9f9; /* خلفية فاتحة مختلفة قليلاً لفصل القسم بصرياً */
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--primary-black), #2a2a2a);
+        }
+
+        /* عنصر بديل مؤقت يمثل معاينة العمل (Placeholder) لحين إضافة صور حقيقية */
+        .portfolio-item .placeholder-icon {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: rgba(245, 166, 35, 0.35);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5,5,5,0.92) 0%, rgba(5,5,5,0.2) 60%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            text-align: right;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-overlay h4 {
+            color: var(--primary-gold);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .portfolio-overlay p {
+            color: #eee;
+            font-size: 0.85rem;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.03);
+        }
+
+        .portfolio-item {
+            transition: transform 0.35s ease;
+        }
+
+        /* قسم التواصل */
+        .contact {
+            background-color: var(--primary-black);
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .contact p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        /* الفوتر */
+        footer {
+            background-color: #000;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================
+           [جديد] تأثيرات الظهور عند التمرير (Scroll Reveal)
+           تُضاف كلاس "is-visible" عبر JavaScript (IntersectionObserver)
+           ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* تأخير متدرج للبطاقات داخل نفس الشبكة لإحساس أكثر سلاسة */
+        .service-card.reveal:nth-child(1) { transition-delay: 0s; }
+        .service-card.reveal:nth-child(2) { transition-delay: 0.12s; }
+        .service-card.reveal:nth-child(3) { transition-delay: 0.24s; }
+
+        .portfolio-item.reveal:nth-child(1) { transition-delay: 0s; }
+        .portfolio-item.reveal:nth-child(2) { transition-delay: 0.08s; }
+        .portfolio-item.reveal:nth-child(3) { transition-delay: 0.16s; }
+        .portfolio-item.reveal:nth-child(4) { transition-delay: 0.24s; }
+        .portfolio-item.reveal:nth-child(5) { transition-delay: 0.32s; }
+        .portfolio-item.reveal:nth-child(6) { transition-delay: 0.4s; }
+
+        /* احترام تفضيل المستخدم بتقليل الحركة */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* =========================================
+           [جديد] التجاوب التام مع جميع أحجام الشاشات
+           ========================================= */
+
+        /* أجهزة لوحية كبيرة */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* الهواتف والأجهزة اللوحية الصغيرة */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            header.scrolled {
+                padding: 10px 20px;
+            }
+
+            /* إظهار زر القائمة الجانبية */
+            .hamburger {
+                display: flex;
+            }
+
+            /* تحويل القائمة إلى قائمة جانبية منزلقة من اليمين */
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--primary-black);
+                box-shadow: -5px 0 25px rgba(0,0,0,0.6);
+                transition: right 0.35s ease;
+                padding-top: 100px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0 30px;
+                gap: 30px;
+            }
+
+            /* طبقة تعتيم خلف القائمة عند فتحها */
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+
+            .nav-overlay.active {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                gap: 20px;
+            }
+
+            .service-card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* الهواتف الصغيرة جداً */
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .services, .portfolio {
+                padding: 70px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="site-header">
+        <div class="logo" style="display: flex; align-items: center; gap: 15px; margin-top: 20px;">
+    <div style="width: 85px; height: 85px; border-radius: 50%; border: 2px solid #f39c12; overflow: hidden; display: flex; justify-content: center; align-items: center; background-color: #fff;">
+        <img src="images/protfolio/my_logo.png" alt="لوجو أحمد" style="width: 100%; height: 100%; object-fit: cover; transform: scale(2.3);">
+    </div>
+    <span style="font-size: 30px; font-weight: bold; color: #f39c12;">AM Agency</span>
+</div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+        <!-- [جديد] طبقة التعتيم التي تظهر خلف القائمة الجانبية على الهاتف -->
+        <div class="nav-overlay" id="nav-overlay"></div>
+
+        <nav id="main-nav">
+            <ul>
+                <li><a href="#home" class="nav-link">الرئيسية</a></li>
+                <li><a href="#services" class="nav-link">خدماتي</a></li>
+                <li><a href="#portfolio" class="nav-link">أعمالي</a></li>
+                <li><a href="#contact" class="nav-link">تواصل معي</a></li>
+            </ul>
+        </nav>
+
+        <!-- [جديد] زر القائمة الجانبية (يظهر فقط على الشاشات الصغيرة) -->
+        <button class="hamburger" id="hamburger-btn" aria-label="فتح القائمة" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <section id="home" class="hero" style="
+    position: relative;
+    width: 100%;
+    min-height: 85vh; /* بيخلي الصورة تاخد أغلب طول الشاشة */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); /* رابط الصورة اللي طلبته */
+    background-size: cover; /* بيخلي الصورة تفرش في المساحة كلها */
+    background-position: center;
+    background-repeat: no-repeat;
+">
+    
+    <!-- طبقة تعتيم (Overlay) عشان تفصل بين الصورة والكلام وتخليه مقروء وواضح -->
+    <div style="
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(15, 15, 15, 0.75); /* أسود شفاف بنسبة 75% */
+        z-index: 1;
+    "></div>
+
+    <!-- المحتوى: الكلام والزرار اللي هيكونوا فوق الصورة -->
+    <div style="
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 850px;
+        padding: 20px;
+    ">
+        <h1 style="color: #f39c12; font-size: 3.5em; margin-bottom: 20px; font-weight: bold; text-shadow: 2px 2px 5px rgba(0,0,0,0.8);">
+            هوية بصرية تصنع الفارق
+        </h1>
+        
+        <p style="font-size: 1.3em; line-height: 1.8; color: #fff; margin-bottom: 35px; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">
+            نجمع بين الإبداع في التصميم الجرافيكي وقوة الاستراتيجيات التسويقية. من تصميم الشعارات الجذابة إلى خدمات التطوير المهني، نحول أفكارك إلى واقع احترافي.
+        </p>
+        
+        <a href="#portfolio" style="display: inline-block; background-color: #f39c12; color: #fff; padding: 15px 45px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 1.2em; transition: 0.3s; box-shadow: 0 5px 15px rgba(243,156,18,0.5);">
+            ابدأ مشروعك الآن
+        </a>
+    </div>
+
+</section>
+
+    <section id="services" class="services">
+        <h2 class="section-title reveal">بماذا <span>نتميز؟</span></h2>
+        <div class="services-grid">
+
+            <div class="service-card reveal">
+                <h3>التصميم الجرافيكي</h3>
+                <p>ابتكار شعارات احترافية وتصميم هويات بصرية متكاملة وتصاميم سوشيال ميديا باستخدام أحدث التقنيات في Photoshop و Illustrator و Canva.</p>
+            </div>
+
+            <div class="service-card reveal">
+                <h3>خدمات التطوير المهني</h3>
+                <p>صياغة وتصميم سير ذاتية احترافية تبرز مهاراتك بشكل استثنائي، مع تجهيز الخريجين لاقتحام سوق العمل بثقة وتميز.</p>
+            </div>
+
+            <div class="service-card reveal">
+                <h3>التسويق وإدخال البيانات</h3>
+                <p>إدارة تواجدك الرقمي، ترتيب وإدخال بيانات المنتجات للمتاجر الإلكترونية، لضمان وصول رسالتك لجمهورك المستهدف بدقة.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- =========================================
+         [جديد] قسم معرض الأعمال (Portfolio)
+         استبدل كتل placeholder-icon بصور حقيقية عبر
+         <img src="..." alt="..."> بنفس أبعاد .portfolio-item
+         ========================================= -->
+    <section id="portfolio" class="portfolio">
+        <h2 class="section-title reveal">معرض <span>أعمالي</span></h2>
+        <div class="portfolio-grid">
+
+    <!-- 1. كارت الهوية البصرية (رابط شغال) -->
+    <a href="identity.html" style="text-decoration: none; color: inherit;">
+        <div class="portfolio-item reveal">
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="هوية بصرية" style="width: 100%; border-radius: 15px;">
+            <div class="portfolio-overlay">
+                <h4>تصميم هوية بصرية</h4>
+                <p>اضغط لرؤية المشروع كاملاً</p>
+            </div>
+        </div>
+    </a>
+
+    <!-- 2. كارت السوشيال ميديا (رابط شغال) -->
+    <a href="social.html" style="text-decoration: none; color: inherit;">
+        <div class="portfolio-item reveal">
+            <img src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="تصميم سوشيال ميديا" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block;">
+            <div class="portfolio-overlay">
+                <h4>تصميم سوشيال ميديا</h4>
+                <p>محتوى بصري لمنصات التواصل الاجتماعي</p>
+            </div>
+        </div>
+    </a>
+
+   <!-- بداية رابط كارت السيرة الذاتية -->
+<a href="cv.html" style="text-decoration: none; color: inherit; display: block;">
+    <div class="portfolio-item reveal">
+<img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="سيرة ذاتية احترافية" style="width: 100%; border-radius: 10px;">        
+        <div class="portfolio-overlay">
+            <h4>سيرة ذاتية احترافية</h4>
+            <p>يبرز نقاط القوة والخبرات</p>
+        </div>
+    </div>
+</a>
+<!-- نهاية الرابط -->
+
+    <!-- بداية رابط كارت تصميم الشعار -->
+<a href="logo.html" style="text-decoration: none; color: inherit; display: block;">
+    <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="تصميم جرافيك" style="width: 100%; border-radius: 10px;">
+
+        <div class="portfolio-overlay">
+            <h4>تصميم شعار</h4>
+            <p>هوية بصرية متكاملة</p>
+        </div>
+    </div>
+</a>
+<!-- نهاية الرابط -->
+
+    <!-- بداية رابط كارت تصميم الأغلفة -->
+<a href="cover.html" style="text-decoration: none; color: inherit; display: block;">
+    <div class="portfolio-item reveal">
+        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="واجهة مستخدم" style="width: 100%; border-radius: 10px;">
+        <div class="portfolio-overlay">
+            <h4>تصميم غلاف</h4>
+            <p>أغلفة كتب ومجلات جذابة</p>
+        </div>
+    </div>
+</a>
+<!-- نهاية الرابط -->
+   <!-- بداية رابط كارت تصميم الواجهات -->
+<a href="uiux.html" style="text-decoration: none; color: inherit; display: block;">
+    <div class="portfolio-item reveal">
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="تأهيل مهني" style="width: 100%; border-radius: 10px;">
+        <div class="portfolio-overlay">
+            <h4>تصميم واجهات</h4>
+            <p>تجربة مستخدم سهلة وجذابة</p>
+        </div>
+    </div>
+</a>
+<!-- نهاية الرابط -->
+
+</div>
+
+        </div>
+    </section>
+<section id="contact" class="contact">
+    <h2 class="section-title reveal" style="color: #fff;">تواصل <span>معي</span></h2>
+    <p class="reveal">أنا هنا للمساعدة.. تواصل معي عبر:</p>
+    
+    <a href="mailto:shaarawy166@gmail.com" style="color: #fff; text-decoration: none; font-size: 1.1rem;">shaarawy166@gmail.com</a>
+    <br><br>
+    
+<a href="https://wa.me/201147408979" style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 18px;">
+    💬 تواصل معي عبر واتساب
+</a>
+</section>
+    <footer>
+        <p>&copy; 2026 جميع الحقوق محفوظة | أحمد مصطفى</p>
+    </footer>
+
+    <script>
+        /* =========================================
+           [جديد] منطق القائمة الجانبية (Hamburger Menu)
+           ========================================= */
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mainNav = document.getElementById('main-nav');
+        const navOverlay = document.getElementById('nav-overlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function toggleMenu(forceClose) {
+            const shouldOpen = forceClose === false ? false : !mainNav.classList.contains('active');
+            mainNav.classList.toggle('active', shouldOpen);
+            hamburgerBtn.classList.toggle('active', shouldOpen);
+            navOverlay.classList.toggle('active', shouldOpen);
+            hamburgerBtn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+            // منع تمرير الصفحة الخلفية أثناء فتح القائمة على الهاتف
+            document.body.style.overflow = shouldOpen ? 'hidden' : '';
+        }
+
+        hamburgerBtn.addEventListener('click', () => toggleMenu());
+        navOverlay.addEventListener('click', () => toggleMenu(false));
+
+        // إغلاق القائمة تلقائياً عند اختيار أي رابط
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => toggleMenu(false));
+        });
+
+        /* =========================================
+           [جديد] تأثير تقلص الهيدر عند التمرير (Sticky Header)
+           ========================================= */
+        const header = document.getElementById('site-header');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        /* =========================================
+           [جديد] تأثيرات الظهور عند التمرير (Scroll Reveal)
+           باستخدام IntersectionObserver بدلاً من مراقبة
+           حدث scroll مباشرة، لأداء أفضل
+           ========================================= */
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // إيقاف المراقبة بعد الظهور مرة واحدة (تحسين الأداء)
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,   // يظهر العنصر عند ظهور 15% منه
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+
+</body>
+</html>
