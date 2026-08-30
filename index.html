@@ -4,7 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أحمد مصطفى | للتصميم الجرافيكي والتسويق</title>
-    <style>
+    <style>/* حالة العنصر قبل ما يظهر (شفاف ونازل لتحت شوية) */
+    /* تأثيرات ظهور العناصر عند التمرير (Scroll Reveal) */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal {
+    /* تنسيقات قسم التواصل الاحترافي */
+.contact-section {
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 30px;
+}
+
+.contact-subtitle {
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 17px;
+}
+body.dark-mode .contact-subtitle {
+    color: #aaa;
+}
+
+.contact-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* عشان لو الموبايل الشاشة صغيرة ينزلوا تحت بعض بشياكة */
+}
+
+/* تصميم الكارت نفسه */
+.contact-card {
+    background: #ffffff;
+    border: 2px solid #eeeeee;
+    border-radius: 15px;
+    padding: 30px 20px;
+    width: 280px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+/* شكل الكارت في الوضع الليلي (محدث) */
+body.dark-mode .contact-card {
+    background-color: #1a1a1a !important;
+    border-color: #333 !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
+}
+
+body.dark-mode .contact-card h3,
+body.dark-mode .contact-card p,
+body.dark-mode .contact-card .contact-icon {
+    color: #ffffff !important;
+}
+
+
+/* تأثير الحركة لما الماوس ييجي على الكارت */
+.contact-card:hover {
+    transform: translateY(-10px);
+    border-color: #f39c12; /* لون هوية موقعك */
+    box-shadow: 0 10px 25px rgba(243, 156, 18, 0.2);
+}
+
+.contact-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.contact-card h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.contact-card p {
+    margin: 0;
+    font-size: 15px;
+    direction: ltr; /* عشان الإيميل يتكتب إنجليزي مظبوط */
+}
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+
+/* حالة العنصر لما المستخدم ينزل بالسكرول ويوصله (بيظهر ويطلع لمكانه بنعومة) */
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* تظبيط صور المعرض والخدمات عشان تملأ الكارت بالكامل بدون فراغات */
+.portfolio-img, .gallery img, .services img, .portfolio-item img {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 3 / 2 !important; /* الخاصية دي سحرية: بتوحد نسبة الطول للعرض لكل الصور */
+    object-fit: cover !important; 
+    display: block;
+}
         /* إعدادات عامة */
         :root {
             /* ألوان مستوحاة من الشعار */
@@ -487,6 +588,81 @@
                 padding: 70px 15px;
             }
         }
+        /* ألوان الوضع الليلي */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-mode header,
+body.dark-mode .project-header {
+    background-color: #1f1f1f;
+}
+
+/* لو عندك كروت أو أقسام عايز تغمقها ضيفها هنا */
+body.dark-mode .services,
+body.dark-mode .portfolio {
+    background-color: #121212;
+    color: #ffffff;
+}
+/* تصميم زرار الوضع الليلي الاحترافي */
+.theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+/* تظبيط مقاسات الموقع عشان يبقى شيك ومتناسق على الموبايل */
+@media (max-width: 768px) {
+    /* تصغير العنوان الرئيسي (هوية بصرية...) */
+    h1, .hero h1 {
+        font-size: 32px !important;
+        line-height: 1.4 !important;
+        padding-top: 20px !important;
+    }
+    
+    /* تصغير الفقرة اللي تحت العنوان */
+    p {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+        padding: 0 10px !important;
+    }
+    
+    /* تصغير الزرار عشان ميبقاش ضخم */
+    .btn, button, a.btn {
+        font-size: 16px !important;
+        padding: 10px 25px !important;
+    }
+    
+    /* تصغير اسم الوكالة (AM Agency) في الهيدر */
+    #site-header span, .logo span {
+        font-size: 22px !important;
+    }
+    
+    /* تصغير اللوجو شوية عشان يتناسب مع الموبايل */
+    #site-header img {
+        width: 60px !important;
+        height: 60px !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -673,17 +849,27 @@
 
         </div>
     </section>
-<section id="contact" class="contact">
-    <h2 class="section-title reveal" style="color: #fff;">تواصل <span>معي</span></h2>
-    <p class="reveal">أنا هنا للمساعدة.. تواصل معي عبر:</p>
-    
-    <a href="mailto:shaarawy166@gmail.com" style="color: #fff; text-decoration: none; font-size: 1.1rem;">shaarawy166@gmail.com</a>
-    <br><br>
-    
-<a href="https://wa.me/201147408979" style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 18px;">
-    💬 تواصل معي عبر واتساب
-</a>
-</section>
+<!-- قسم التواصل الجديد -->
+<div class="contact-section reveal">
+    <h2 style="color: #f39c12; margin-bottom: 10px;">تواصل معي</h2>
+    <p class="contact-subtitle">جاهزون لتحويل أفكارك إلى واقع مرئي مذهل. اختر الطريقة الأنسب لك!</p>
+
+    <div class="contact-cards">
+        <!-- كارت الإيميل -->
+        <a href="mailto:shaarawy166@gmail.com" class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <h3>البريد الإلكتروني</h3>
+            <p>shaarawy166@gmail.com</p>
+        </a>
+
+        <!-- كارت الواتساب (متنساش تغير رقم الزيرو لـ رقمك الحقيقي) -->
+        <a href="https://wa.me/201147408979" target="_blank" class="contact-card">
+            <div class="contact-icon">💬</div>
+            <h3>واتساب</h3>
+            <p>اضغط هنا للمراسلة الفورية</p>
+        </a>
+    </div>
+</div>
     <footer>
         <p>&copy; 2026 جميع الحقوق محفوظة | أحمد مصطفى</p>
     </footer>
@@ -750,6 +936,31 @@
 
         revealElements.forEach(el => revealObserver.observe(el));
     </script>
+    <button id="darkModeToggle" class="theme-toggle">🌙</button>
 
+<script>
+    const btn = document.getElementById("darkModeToggle");
+    const currentTheme = localStorage.getItem("theme");
+
+    // لو العميل كان مختار الوضع الليلي قبل كده
+    if (currentTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        btn.innerHTML = "☀️";
+    }
+
+    // لما يدوس على الزرار
+    btn.addEventListener("click", function() {
+        document.body.classList.toggle("dark-mode");
+        
+        let theme = "light";
+        if (document.body.classList.contains("dark-mode")) {
+            theme = "dark";
+            btn.innerHTML = "☀️"; // يقلب شمس
+        } else {
+            btn.innerHTML = "🌙"; // يرجع قمر
+        }
+        localStorage.setItem("theme", theme);
+    });
+</script>
 </body>
 </html>
