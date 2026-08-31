@@ -6,7 +6,7 @@
     <title>أحمد مصطفى | للتصميم الجرافيكي والتسويق</title>
     <style>/* حالة العنصر قبل ما يظهر (شفاف ونازل لتحت شوية) */
     /* تأثيرات ظهور العناصر عند التمرير (Scroll Reveal) */
-.reveal {
+   .reveal {
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease-out;
@@ -848,27 +848,251 @@ body.dark-mode .portfolio {
 </div>
 
         </div>
-    </section>
-<!-- قسم التواصل الجديد -->
-<div class="contact-section reveal">
-    <h2 style="color: #f39c12; margin-bottom: 10px;">تواصل معي</h2>
-    <p class="contact-subtitle">جاهزون لتحويل أفكارك إلى واقع مرئي مذهل. اختر الطريقة الأنسب لك!</p>
+    <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تواصل معي - AM Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #F6F1E7;
+    --ink: #14181F;
+    --ink-soft: #2A2F3A;
+    --muted: #6E7280;
+    --orange: #E67E22;
+    --orange-deep: #C9631A;
+    --line: rgba(20,24,31,0.10);
+    --card-bg: #FFFFFF;
+  }
 
-    <div class="contact-cards">
-        <!-- كارت الإيميل -->
-        <a href="mailto:shaarawy166@gmail.com" class="contact-card">
-            <div class="contact-icon">✉️</div>
-            <h3>البريد الإلكتروني</h3>
-            <p>shaarawy166@gmail.com</p>
-        </a>
+  *{ box-sizing: border-box; }
 
-        <!-- كارت الواتساب (متنساش تغير رقم الزيرو لـ رقمك الحقيقي) -->
-        <a href="https://wa.me/201147408979" target="_blank" class="contact-card">
-            <div class="contact-icon">💬</div>
-            <h3>واتساب</h3>
-            <p>اضغط هنا للمراسلة الفورية</p>
-        </a>
+  body{
+    margin:0;
+    font-family: 'Cairo', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  .contact-section{
+    position: relative;
+    padding: 96px 8vw 88px;
+    overflow: hidden;
+  }
+
+  /* subtle signature accent — a single arcing stroke, referencing the
+     circular AM logomark, instead of decorative blobs everywhere */
+  .contact-section::before{
+    content:"";
+    position:absolute;
+    top:-140px;
+    left:-140px;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    border:1px solid var(--line);
+  }
+  .contact-section::after{
+    content:"";
+    position:absolute;
+    top:-90px;
+    left:-90px;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    border:1px solid var(--orange);
+    opacity:0.35;
+  }
+
+  .contact-inner{
+    position: relative;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .contact-heading{
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .contact-kicker{
+    display:inline-block;
+    font-size: 15px;
+    color: var(--orange-deep);
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: 0.2px;
+  }
+
+  .contact-title{
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 900;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+
+  .contact-sub{
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.9;
+  }
+
+  .contact-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .contact-card{
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 34px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+  }
+
+  .contact-card:hover,
+  .contact-card:focus-visible{
+    transform: translateY(-4px);
+    border-color: var(--orange);
+    box-shadow: 0 18px 40px -22px rgba(20,24,31,0.35);
+    outline: none;
+  }
+
+  .contact-icon{
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink);
+    color: var(--cream);
+    transition: background 0.25s ease;
+  }
+
+  .contact-card:hover .contact-icon{
+    background: var(--orange);
+  }
+
+  .contact-icon svg{
+    width: 26px;
+    height: 26px;
+  }
+
+  .contact-text{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+  }
+
+  .contact-label{
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .contact-value{
+    font-size: 14.5px;
+    color: var(--muted);
+    direction: ltr;
+    text-align: right;
+    unicode-bidi: plaintext;
+  }
+
+  .contact-arrow{
+    margin-right: auto;
+    color: var(--muted);
+    opacity: 0;
+    transform: translateX(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .contact-card:hover .contact-arrow{
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--orange);
+  }
+
+  @media (max-width: 720px){
+    .contact-section{ padding: 72px 6vw 64px; }
+    .contact-grid{ grid-template-columns: 1fr; }
+    .contact-card{ padding: 26px 22px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .contact-card, .contact-icon, .contact-arrow{ transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-heading">
+      <span class="contact-kicker">لنبدأ مشروعك القادم</span>
+      <h2 class="contact-title">تواصل معي</h2>
+      <p class="contact-sub">جاهز لتحويل أفكارك إلى واقع مرئي مذهل. اختر الطريقة الأنسب لك، وسأرد عليك في أقرب وقت.</p>
     </div>
+
+    <div class="contact-grid">
+
+      <!-- WhatsApp -->
+      <a class="contact-card" href="https://wa.me/201147408979" target="_blank" rel="noopener">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91C22 6.45 17.5 2 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.23 8.26-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.55-3.7 8.25-8.25 8.25zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.64.81-.78.97-.15.17-.29.19-.54.06-.25-.12-1.04-.38-1.99-1.22-.73-.66-1.23-1.46-1.37-1.71-.15-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.06 0 1.22.88 2.4 1 2.56.13.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.19.21-.58.21-1.08.15-1.19-.06-.11-.23-.17-.48-.29z"/>
+          </svg>
+        </span>
+        <span class="contact-text">
+          <span class="contact-label">واتساب</span>
+          <span class="contact-value">اضغط هنا للمراسلة الفورية</span>
+        </span>
+        <span class="contact-arrow" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- Email -->
+      <a class="contact-card" href="mailto:shaarawy166@gmail.com">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="5" width="18" height="14" rx="2.5"/>
+            <path d="m4 7 8 6 8-6"/>
+          </svg>
+        </span>
+        <span class="contact-text">
+          <span class="contact-label">البريد الإلكتروني</span>
+          <span class="contact-value">shaarawy166@gmail.com</span>
+        </span>
+        <span class="contact-arrow" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
 </div>
     <footer>
         <p>&copy; 2026 جميع الحقوق محفوظة | أحمد مصطفى</p>
