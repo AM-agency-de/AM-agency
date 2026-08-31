@@ -6,22 +6,42 @@
     <title>أحمد مصطفى | للتصميم الجرافيكي والتسويق</title>
     <style>/* حالة العنصر قبل ما يظهر (شفاف ونازل لتحت شوية) */
     /* تأثيرات ظهور العناصر عند التمرير (Scroll Reveal) */
-    /* تثبيت الفوتر في أسفل الشاشة */
-footer {
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 18px 15px !important;
-    box-sizing: border-box !important;
-    z-index: 9999 !important;
+    /* تظبيط مقاس الهيدر */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600&display=swap');
+#site-header {
+    height: 80px !important; 
+    display: flex !important;
+    align-items: center !important;
+    background-color: #050505 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7) !important;
 }
 
-footer p {
-    margin: 0 !important;
-    padding: 0 !important;
+/* نرجع حاوية اللوجو والكلمة تاخد مساحتها براحتها */
+#site-header .logo {
+    width: auto !important; 
+    height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+
+/* نصغر الدائرة اللي جواها الصورة بس */
+#site-header .logo div {
+    width: 55px !important;
+    height: 55px !important;
+}
+
+/* تظبيط حجم كلمة AM Agency عشان تبقى لايقة مع اللوجو */
+#site-header .logo span {
+    font-size: 24px !important;
+    white-space: nowrap !important; /* عشان الكلمة متجيش فوق بعضها */
+}
+
+body {
+    padding-top: 80px !important; 
+}
+    .portfolio {
+    padding-bottom: 0 !important;
 }
    .reveal {
     opacity: 0;
@@ -679,6 +699,21 @@ body.dark-mode .portfolio {
         width: 60px !important;
         height: 60px !important;
     }
+}
+p {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 500 !important; 
+    line-height: 1.9 !important; 
+    color: #555555 !important; 
+}
+/* ده هيرجع كلام الواجهة الرئيسية اللي على الصورة للون الأبيض عشان ينور */
+#home p, .hero p {
+    color: #ffffff !important;
+}
+/* تفتيح لون الكلام اللي جوه معرض الأعمال عشان ينور على الصور */
+#portfolio p {
+    color: #ffffff !important;
 }
     </style>
 </head>
