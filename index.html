@@ -6,6 +6,23 @@
     <title>أحمد مصطفى | للتصميم الجرافيكي والتسويق</title>
     <style>/* حالة العنصر قبل ما يظهر (شفاف ونازل لتحت شوية) */
     /* تأثيرات ظهور العناصر عند التمرير (Scroll Reveal) */
+    /* تثبيت الفوتر في أسفل الشاشة */
+footer {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 18px 15px !important;
+    box-sizing: border-box !important;
+    z-index: 9999 !important;
+}
+
+footer p {
+    margin: 0 !important;
+    padding: 0 !important;
+}
    .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -1091,12 +1108,11 @@ body.dark-mode .portfolio {
   </div>
 </section>
 
-</body>
-</html>
-</div>
     <footer>
         <p>&copy; 2026 جميع الحقوق محفوظة | أحمد مصطفى</p>
     </footer>
+</body>
+</html>
 
     <script>
         /* =========================================
