@@ -89,19 +89,6 @@ body.dark-mode .contact-subtitle {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
 }
-/* شكل الكارت في الوضع الليلي (محدث) */
-body.dark-mode .contact-card {
-    background-color: #1a1a1a !important;
-    border-color: #333 !important;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
-}
-
-body.dark-mode .contact-card h3,
-body.dark-mode .contact-card p,
-body.dark-mode .contact-card .contact-icon {
-    color: #ffffff !important;
-}
-
 
 /* تأثير الحركة لما الماوس ييجي على الكارت */
 .contact-card:hover {
@@ -719,6 +706,16 @@ p {
 #contact p, .contact p, .contact-section p {
     color: #555555 !important;
 }
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
     </style>
 </head>
 <body>
@@ -971,18 +968,408 @@ p {
 </style>
 </head>
 <body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>AM Agency — لماذا نتميز (نسخة 6)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --paper:#FCFCFB;
+    --black:#111112;
+    --yellow:#F4C81C;
+    --text-body:#45454A;
+    --line:#ECECEA;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Tajawal', sans-serif;
+    background:var(--white);
+  }
+
+  .why{
+    position:relative;
+    padding:130px 8vw 150px;
+    overflow:hidden;
+    isolation:isolate;
+  }
+
+  .deco{
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+  }
+  .deco .dots{
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(17,17,18,0.10) 1.5px, transparent 1.5px);
+    background-size:26px 26px;
+    -webkit-mask-image:radial-gradient(650px 550px at 88% 8%, black, transparent 75%);
+    mask-image:radial-gradient(650px 550px at 88% 8%, black, transparent 75%);
+  }
+  .deco .circle{
+    position:absolute;
+    top:-90px;
+    left:-90px;
+    width:340px;
+    height:340px;
+    border-radius:50%;
+    border:2px solid rgba(17,17,18,0.14);
+    animation:spin-slow 34s linear infinite;
+  }
+  .deco .circle-inner{
+    position:absolute;
+    top:-30px;
+    left:-30px;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    border:2px solid rgba(244,200,28,0.65);
+    animation:spin-slow-rev 22s linear infinite;
+  }
+  .deco .square{
+    position:absolute;
+    bottom:60px;
+    left:6vw;
+    width:120px;
+    height:120px;
+    border:2px solid rgba(17,17,18,0.16);
+    transform:rotate(18deg);
+    animation:sway 9s ease-in-out infinite;
+  }
+  .deco .blob{
+    position:absolute;
+    bottom:-160px;
+    right:4vw;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(244,200,28,0.34), transparent 68%);
+    filter:blur(2px);
+    animation:float 8s ease-in-out infinite;
+  }
+  .deco .blob-2{
+    position:absolute;
+    top:-120px;
+    right:14vw;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(17,17,18,0.07), transparent 70%);
+    animation:float 11s ease-in-out infinite reverse;
+  }
+
+  .deco .dot-mark{
+    position:absolute;
+    border-radius:50%;
+    background:var(--yellow);
+  }
+  .deco .dot-1{
+    top:22%;
+    left:18%;
+    width:12px;
+    height:12px;
+    opacity:.8;
+    animation:drift 7s ease-in-out infinite;
+  }
+  .deco .dot-2{
+    top:64%;
+    left:9%;
+    width:8px;
+    height:8px;
+    background:rgba(17,17,18,0.5);
+    animation:drift 9s ease-in-out infinite 1.2s;
+  }
+  .deco .tri{
+    position:absolute;
+    top:40%;
+    right:9vw;
+    width:0;
+    height:0;
+    border-left:14px solid transparent;
+    border-right:14px solid transparent;
+    border-bottom:22px solid rgba(17,17,18,0.10);
+    animation:sway 10s ease-in-out infinite;
+  }
+  .deco .line-mark{
+    position:absolute;
+    bottom:24%;
+    left:26%;
+    width:70px;
+    height:2px;
+    background:rgba(244,200,28,0.55);
+    animation:drift 8s ease-in-out infinite .6s;
+  }
+
+  @keyframes drift{
+    0%, 100%{ transform:translate(0,0); }
+    50%{ transform:translate(10px,-16px); }
+  }
+
+  .deco .hex{
+    position:absolute;
+    bottom:8%;
+    right:22vw;
+    width:64px;
+    height:64px;
+    background:rgba(244,200,28,0.16);
+    clip-path:polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
+    animation:spin-slow 26s linear infinite;
+  }
+
+  .deco .dot-cluster{
+    position:absolute;
+    bottom:14%;
+    left:14vw;
+  }
+  .deco .dot-cluster span{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(17,17,18,0.5);
+  }
+  .deco .dot-cluster span:nth-child(1){
+    width:10px; height:10px; top:0; left:0;
+    animation:float 6s ease-in-out infinite;
+  }
+  .deco .dot-cluster span:nth-child(2){
+    width:6px; height:6px; top:18px; left:22px;
+    background:var(--yellow);
+    animation:float 7s ease-in-out infinite .5s;
+  }
+  .deco .dot-cluster span:nth-child(3){
+    width:14px; height:14px; top:-6px; left:34px;
+    opacity:.5;
+    animation:float 8s ease-in-out infinite 1s;
+  }
+
+  .deco .wave{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:60px;
+    fill:none;
+    stroke:rgba(17,17,18,0.10);
+    stroke-width:2;
+    animation:wave-shift 12s ease-in-out infinite;
+  }
+
+  @keyframes wave-shift{
+    0%, 100%{ transform:translateX(0) translateY(0); }
+    50%{ transform:translateX(-14px) translateY(6px); }
+  }
+
+  @keyframes spin-slow{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
+  }
+  @keyframes spin-slow-rev{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(-360deg); }
+  }
+  @keyframes sway{
+    0%, 100%{ transform:rotate(18deg) translateY(0); }
+    50%{ transform:rotate(28deg) translateY(-14px); }
+  }
+  @keyframes float{
+    0%, 100%{ transform:translateY(0) scale(1); }
+    50%{ transform:translateY(-26px) scale(1.06); }
+  }
+
+  .intro{
+    max-width:780px;
+    margin-bottom:86px;
+    opacity:0;
+    animation:rise .7s ease forwards;
+  }
+  .intro .tag{
+    display:inline-block;
+    background:var(--black);
+    color:var(--yellow);
+    font-weight:700;
+    font-size:14px;
+    padding:6px 16px;
+    margin-bottom:26px;
+  }
+  .intro h2{
+    font-size:clamp(34px, 4.6vw, 52px);
+    font-weight:900;
+    color:var(--black);
+    line-height:1.25;
+    margin:0 0 20px;
+  }
+  .intro h2 span{
+    position:relative;
+    display:inline-block;
+  }
+  .intro h2 span::after{
+    content:"";
+    position:absolute;
+    right:0; left:0; bottom:6px;
+    height:12px;
+    background:var(--yellow);
+    z-index:-1;
+  }
+  .intro p{
+    font-size:17px;
+    line-height:1.95;
+    color:var(--text-body);
+    margin:0;
+    max-width:600px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:36px;
+    opacity:0;
+    animation:rise .7s ease .2s forwards;
+  }
+
+  .card{
+    position:relative;
+    padding:44px 30px 40px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:18px;
+    overflow:hidden;
+    transition:border-color .4s ease, transform .4s ease, box-shadow .4s ease;
+  }
+  .card:hover, .card.open{
+    border-color:var(--yellow);
+    transform:translateY(-4px);
+    box-shadow:
+      0 0 0 1px rgba(244,200,28,0.55),
+      0 0 22px rgba(244,200,28,0.45),
+      0 0 55px rgba(244,200,28,0.20);
+  }
+
+  .glow{
+    position:absolute;
+    top:-40px;
+    right:-30px;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(244,200,28,0.35), transparent 70%);
+    filter:blur(6px);
+    pointer-events:none;
+  }
+
+  .icon-draw{
+    position:relative;
+    width:58px;
+    height:58px;
+    margin-bottom:30px;
+    animation:icon-float 3.6s ease-in-out infinite;
+  }
+  .icon-draw svg{
+    width:100%;
+    height:100%;
+    fill:none;
+    stroke:var(--black);
+    stroke-width:1.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .card:nth-child(2) .icon-draw{ animation-delay:.4s; }
+  .card:nth-child(3) .icon-draw{ animation-delay:.8s; }
+
+  @keyframes icon-float{
+    0%, 100%{ transform:translateY(0); }
+    50%{ transform:translateY(-8px); }
+  }
+
+  .card h3{
+    font-size:20px;
+    font-weight:700;
+    color:var(--black);
+    margin:0 0 8px;
+    display:inline-block;
+    position:relative;
+  }
+  .card h3::after{
+    content:"";
+    position:absolute;
+    right:0; left:0; bottom:-6px;
+    height:2px;
+    background:var(--yellow);
+    transform:scaleX(0);
+    transform-origin:right;
+    transition:transform .35s ease;
+  }
+  .card:hover h3::after{
+    transform:scaleX(1);
+  }
+
+  .card .spacer{
+    height:20px;
+  }
+
+  .card p{
+    font-size:15px;
+    line-height:1.95;
+    color:#313136;
+    margin:0;
+  }
+
+  @keyframes rise{
+    from{opacity:0; transform:translateY(22px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .intro, .grid{animation:none; opacity:1;}
+    .card{transition:none;}
+    .deco .circle, .deco .circle-inner, .deco .square, .deco .blob, .deco .blob-2, .deco .dot-mark, .deco .tri, .deco .line-mark, .deco .hex, .deco .dot-cluster span, .deco .wave{animation:none;}
+    .icon-draw{animation:none;}
+  }
+
+  @media (max-width:900px){
+    .grid{grid-template-columns:1fr;}
+  }
+  /* توضيح الكلام تحت عنوان ليه تختار معانا */
+.intro p {
+    color: #333333 !important;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
 
 <section class="why">
 
-  <div class="intro">
-    <span class="tag">AM Agency</span>
-    <h2>ليه تختار تشتغل <span>معانا؟</span></h2>
+  <div class="deco">
+    <div class="dots"></div>
+    <div class="circle"></div>
+    <div class="circle-inner"></div>
+    <div class="square"></div>
+    <div class="blob"></div>
+    <div class="blob-2"></div>
+    <div class="dot-mark dot-1"></div>
+    <div class="dot-mark dot-2"></div>
+    <div class="tri"></div>
+    <div class="line-mark"></div>
+    <div class="hex"></div>
+    <div class="dot-cluster">
+      <span></span><span></span><span></span>
+    </div>
+    <svg class="wave" viewBox="0 0 600 60" preserveAspectRatio="none">
+      <path d="M0 30 C 100 0, 200 60, 300 30 S 500 0, 600 30" />
+    </svg>
+  </div>
+
+  <div class="intro reveal">    <h2>ليه تختار تشتغل <span>معانا؟</span></h2>
     <p>هوية بصرية قوية، ومحتوى محسوب، وتطوير مهني حقيقي — كل ده في مكان واحد، بشغل مصمم يفرق فعلاً.</p>
   </div>
 
   <div class="grid">
-
-    <div class="card">
+<div class="card reveal">
       <div class="glow"></div>
       <div class="icon-draw">
         <svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11a2 2 0 000-3l-1-1a2 2 0 00-3 0L4 16l-1 4z"/></svg>
@@ -991,8 +1378,7 @@ p {
       <div class="spacer"></div>
       <p>ابتكار شعارات احترافية وتصميم هويات بصرية متكاملة، وتصاميم سوشيال ميديا باستخدام أحدث التقنيات في Photoshop، Illustrator، InDesign، Canva.</p>
     </div>
-
-    <div class="card">
+<div class="card reveal">
       <div class="glow"></div>
       <div class="icon-draw">
         <svg viewBox="0 0 24 24"><path d="M3 10v4a1 1 0 001 1h2l10 5V4L6 9H4a1 1 0 00-1 1z"/><path d="M18 9a4 4 0 010 6"/></svg>
@@ -1001,8 +1387,7 @@ p {
       <div class="spacer"></div>
       <p>إدارة تواجدك الرقمي، وترتيب وإدخال بيانات المنتجات للمتاجر الإلكترونية، لضمان وصول رسالتك لجمهورك المستهدف بدقة.</p>
     </div>
-
-    <div class="card">
+<div class="card reveal">
       <div class="glow"></div>
       <div class="icon-draw">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M8 13l-2 8 6-3 6 3-2-8"/></svg>
@@ -1078,6 +1463,7 @@ p {
 
 </body>
 </html>
+
     </section>
 
     <!-- =========================================
@@ -1473,31 +1859,20 @@ p {
 
         revealElements.forEach(el => revealObserver.observe(el));
     </script>
-    <button id="darkModeToggle" class="theme-toggle">🌙</button>
-
-<script>
-    const btn = document.getElementById("darkModeToggle");
-    const currentTheme = localStorage.getItem("theme");
-
-    // لو العميل كان مختار الوضع الليلي قبل كده
-    if (currentTheme === "dark") {
-        document.body.classList.add("dark-mode");
-        btn.innerHTML = "☀️";
-    }
-
-    // لما يدوس على الزرار
-    btn.addEventListener("click", function() {
-        document.body.classList.toggle("dark-mode");
-        
-        let theme = "light";
-        if (document.body.classList.contains("dark-mode")) {
-            theme = "dark";
-            btn.innerHTML = "☀️"; // يقلب شمس
-        } else {
-            btn.innerHTML = "🌙"; // يرجع قمر
+   <script>
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 100;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
         }
-        localStorage.setItem("theme", theme);
-    });
+    }
+    window.addEventListener("scroll", reveal);
+    reveal();
 </script>
 </body>
 </html>
